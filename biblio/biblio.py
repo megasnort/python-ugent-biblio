@@ -47,7 +47,7 @@ def publication(publication_id):
 
     url = BASE_URL + 'publication/' + str(publication_id)
 
-    return _get_result(url, None)
+    return _get_result(url, {})
 
 
 def publications_by_person(ugent_id):
@@ -66,41 +66,37 @@ def publications_by_person(ugent_id):
 
     url = BASE_URL + 'person/' + str(ugent_id_int) + '/publication/export'
 
-    return _get_result(url, None)
+    return _get_result(url, {})
 
 
-def search(**kwargs):
+def search(q):
     """
-    Search the Biblio-Api for publications have a certain keyword
-    :param kwargs:
+    Search the Biblio Api for publications having a certain keyword
+    :param q:
     :return:
     """
-    allowed_parameters = ('q', 'sort')
-    url = BASE_URL + 'publication'
 
-    return _get_result(url, allowed_parameters, **kwargs)
+    url = BASE_URL + 'publication/export'
+    params = {
+        q: q
+    }
+
+    return _get_result(url, params)
 
 
-def _get_result(url, allowed_parameters, **kwargs):
+def _get_result(url, params):
     """
     Get an API-response, formatted as json back from the API.
 
     :param url:
     :param allowed_parameters:
-    :param kwargs:
+    :param params:
     :return:
     """
-    if allowed_parameters:
-        for arg in kwargs:
-            if arg not in allowed_parameters:
-                raise NotAllowedParameter(
-                    '{0} is not allowed as parameter. Only {1} are allowed.'
-                    .format(arg, ','.join(allowed_parameters))
-                )
 
-    kwargs['format'] = 'json'
+    params['format'] = 'json'
 
-    response = requests.get(url, params=kwargs)
+    response = requests.get(url, params=params)
 
     if response.status_code == 200:
         try:
