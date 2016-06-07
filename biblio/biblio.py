@@ -69,6 +69,23 @@ def publications_by_person(ugent_id):
     return _get_result(url, {})
 
 
+def publications_by_group(ugent_ids):
+    """
+    Return all the publications of a group of people
+    :param ugent_ids:
+    :return:
+    """
+
+    try:
+        ugent_ids_int = [int(x) for x in ugent_ids]
+    except ValueError:
+        raise InvalidID('Not all IDs are valid integers.')
+
+    url = BASE_URL + 'group/' + ','.join(ugent_ids_int) + '/publication/export'
+
+    return _get_result(url, {})
+
+
 def search(q):
     """
     Search the Biblio Api for publications having a certain keyword

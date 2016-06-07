@@ -1,7 +1,7 @@
 """
 Connect to the UGent Biblio API
 """
-from .biblio import search, BASE_URL, publications_by_person, publication
+from .biblio import search, BASE_URL, publications_by_person, publications_by_group, publication
 
 __author__ = 'Stef Bastiaansen'
 __email__ = 'stef.bastiaansen@ugent.be'
