@@ -3,14 +3,16 @@
 import requests
 import pytest
 
-from biblio.biblio import _get_result, search, publications_by_person, publications_by_persons, BASE_URL, NotAllowedParameter, InvalidID, publication
+from biblio.biblio import _get_result, search, publications_by_person, publications_by_group, BASE_URL, NotAllowedParameter, InvalidID, publication
 
 
 class TestApi:
     # Orphée
     VALID_UGENT_ID = '802000574659'
     VALID_PUBLICATION_ID = '5731482'
-    VALID_UGENT_GROUP = ['802000574659', '802000574659']
+
+    # Orphée and Veronique
+    VALID_UGENT_GROUP = ['802000574659', '802000247889']
 
     INVALID_UGENT_ID = '1'
     INVALID_PUBLICATION_ID = '1'
@@ -24,7 +26,7 @@ class TestApi:
         assert 'application/json; charset=utf-8' == response.headers['content-type']
 
     def test_search_response_is_a_list(self):
-        assert isinstance(search('test'), list)
+        assert isinstance(search('111'), list)
 
     def test_publications_by_person_response_is_a_list(self):
         assert isinstance(publications_by_person(self.VALID_UGENT_ID), list)
@@ -36,7 +38,7 @@ class TestApi:
         assert len(publications_by_person(self.VALID_UGENT_ID)) > 0
 
     def test_publications_by_persons_response_is_a_list(self):
-        assert isinstance(publications_by_persons(self.VALID_UGENT_GROUP), list)
+        assert isinstance(publications_by_group(self.VALID_UGENT_GROUP), list)
 
     def test_invalid_ugent_id(self):
         with pytest.raises(InvalidID):

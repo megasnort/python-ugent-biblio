@@ -81,7 +81,7 @@ def publications_by_group(ugent_ids):
     except ValueError:
         raise InvalidID('Not all IDs are valid integers.')
 
-    url = BASE_URL + 'group/' + ','.join(ugent_ids_int) + '/publication/export'
+    url = BASE_URL + 'group/' + ','.join([str(x) for x in ugent_ids_int]) + '/publication/export'
 
     return _get_result(url, {})
 
@@ -95,7 +95,7 @@ def search(q):
 
     url = BASE_URL + 'publication/export'
     params = {
-        q: q
+        'q': q
     }
 
     return _get_result(url, params)
@@ -114,7 +114,7 @@ def _get_result(url, params):
     params['format'] = 'json'
 
     response = requests.get(url, params=params)
-
+    print
     if response.status_code == 200:
         try:
             return json.loads(response.text)
