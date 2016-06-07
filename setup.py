@@ -1,6 +1,6 @@
 from setuptools import setup
 
-setup(name='ugent_biblio',
+setup(name='ugent-biblio',
       version='0.1.0',
       description='Connector to the API of Ghent University Academic Bibliography',
       classifiers=[

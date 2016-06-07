@@ -24,11 +24,30 @@ class NotAllowedParameter(Exception):
     pass
 
 
-class InvalidUGentID(Exception):
+class InvalidID(Exception):
     """
     Exception placeholder for easier debugging.
     """
     pass
+
+
+def publication(publication_id):
+    """
+    Return a single publication
+    :param publication_id:
+    :return:
+    """
+    try:
+        publication_id = int(publication_id)
+    except ValueError:
+        raise InvalidID(
+            '{0} should be an integer.'
+            .format(publication_id)
+        )
+
+    url = BASE_URL + 'publication/' + str(publication_id)
+
+    return _get_result(url, None)
 
 
 def publications_by_person(ugent_id):
@@ -40,7 +59,7 @@ def publications_by_person(ugent_id):
     try:
         ugent_id_int = int(ugent_id)
     except ValueError:
-        raise InvalidUGentID(
+        raise InvalidID(
             '{0} is an invalid format for a UGentID.'
             .format(ugent_id)
         )
@@ -83,12 +102,15 @@ def _get_result(url, allowed_parameters, **kwargs):
 
     response = requests.get(url, params=kwargs)
 
-    try:
-        result = json.loads(response.text)
-    except ValueError:
-        # some of the api calls return one json object per line
-        json_string_list = response.text.split('\n')
+    if response.status_code == 200:
+        try:
+            return json.loads(response.text)
+        except ValueError:
+            # some of the api calls return one json object per line
+            json_string_list = response.text.split('\n')
 
-        result = [json.loads(x) for x in json_string_list if x]
+            return [json.loads(x) for x in json_string_list if x]
 
-    return result
+    return None
+
+
