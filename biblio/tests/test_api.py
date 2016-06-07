@@ -3,11 +3,11 @@
 import requests
 import pytest
 
-from biblio.biblio import search, publications_by_person, BASE_URL, NotAllowedParameter, InvalidUGentID
+from biblio.biblio import search, publications_by_person, BASE_URL,\
+    NotAllowedParameter, InvalidUGentID
 
 
 class TestApi:
-
     # Orphée
     CORRECT_UGENT_ID = 802000574659
 
