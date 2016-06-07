@@ -6,8 +6,11 @@ To use the API in Python this wrapper is available. Instead of returning JSON, i
 
 ## Installation
 
-...
+Since we are still very beta:
 
+```
+pip install git+git://github.com/megasnort/python-ugent-biblio.git
+```
 
 ## Usage
 
