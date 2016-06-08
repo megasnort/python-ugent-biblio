@@ -113,7 +113,19 @@ def publications_by_group(ugent_ids):
     return _get_result(url, {})
 
 
-def search(q=None):
+def publications_by_project(project_id):
+    """
+    Return all the publications of a project
+    :param project_id:
+    :return:
+    """
+
+    url = BASE_URL + 'project/' + project_id + '/publication/export'
+
+    return _get_result(url, {})
+
+
+def search(query=None):
     """
     Search the Biblio Api for publications having a certain keyword.
     :param q:
@@ -122,8 +134,8 @@ def search(q=None):
 
     url = BASE_URL + 'publication/export'
 
-    if q:
-        params = {'q': q}
+    if query:
+        params = {'q': query}
     else:
         params = {}
 
@@ -154,5 +166,3 @@ def _get_result(url, params):
             return [json.loads(x) for x in json_string_list if x]
 
     return None
-
-

@@ -3,7 +3,8 @@
 import requests
 import pytest
 
-from biblio.biblio import publications_by_organisation, search, publications_by_person, publications_by_group, BASE_URL, NotAllowedParameter, InvalidID, publication
+from biblio.biblio import publications_by_project, publications_by_organisation, search, publications_by_person, \
+    publications_by_group, BASE_URL, InvalidID, publication
 
 
 class TestApi:
@@ -14,8 +15,12 @@ class TestApi:
     # Orphée and Veronique
     VALID_UGENT_GROUP = ['802000574659', '802000247889']
 
-    #
+    # Department of Experimental psychology
     VALID_ORGANISATION_ID = 'PP02'
+
+    # LT3
+    VALID_PROJECT_ID = 'LT3'
+
     INVALID_UGENT_ID = '1'
     INVALID_PUBLICATION_ID = '1'
 
@@ -62,6 +67,7 @@ class TestApi:
         assert '_id' in item
         assert item['_id'] == str(self.VALID_PUBLICATION_ID)
 
+    @pytest.mark.slow
     def test_publication_for_organisations(self):
         all_items = publications_by_organisation(self.VALID_ORGANISATION_ID)
         items_for_year = publications_by_organisation(self.VALID_ORGANISATION_ID, 2015)
@@ -70,3 +76,7 @@ class TestApi:
         assert len(items_for_year) > 1
         assert len(all_items) > len(items_for_year)
 
+    def test_publication_for_project(self):
+        items = publications_by_project(self.VALID_PROJECT_ID)
+        assert isinstance(items, list)
+        assert len(items) > 10

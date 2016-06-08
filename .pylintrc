@@ -1,2 +1,3 @@
 [MASTER]
 ignore=tests
+reports=no
