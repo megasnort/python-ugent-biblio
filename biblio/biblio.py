@@ -149,7 +149,7 @@ def _get_result(url, params):
     params['format'] = 'json'
 
     response = requests.get(url, params=params)
-    print response.url
+
     if response.status_code == 200:
         try:
             return json.loads(response.text)
