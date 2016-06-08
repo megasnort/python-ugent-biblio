@@ -28,6 +28,10 @@ class TestApi:
     def test_search_response_is_a_list(self):
         assert isinstance(search('111'), list)
 
+    @pytest.mark.slow
+    def test_search_without_an_argument_returns_everything(self):
+        assert len(search()) > 100
+
     def test_publications_by_person_response_is_a_list(self):
         assert isinstance(publications_by_person(self.VALID_UGENT_ID), list)
 

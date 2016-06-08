@@ -52,7 +52,7 @@ def publication(publication_id):
 
 def publications_by_person(ugent_id):
     """
-    Return all the publications of certain ugent id
+    Return all the publications for certain ugent id
     :param ugent_id:
     :return:
     """
@@ -60,7 +60,7 @@ def publications_by_person(ugent_id):
         ugent_id_int = int(ugent_id)
     except ValueError:
         raise InvalidID(
-            '{0} is an invalid format for a UGentID.'
+            '{0} is an invalid format for a UGentID. It should be an integer.'
             .format(ugent_id)
         )
 
@@ -86,17 +86,19 @@ def publications_by_group(ugent_ids):
     return _get_result(url, {})
 
 
-def search(q):
+def search(q=None):
     """
-    Search the Biblio Api for publications having a certain keyword
+    Search the Biblio Api for publications having a certain keyword.
     :param q:
     :return:
     """
 
     url = BASE_URL + 'publication/export'
-    params = {
-        'q': q
-    }
+
+    if q:
+        params = {'q': q}
+    else:
+        params = {}
 
     return _get_result(url, params)
 

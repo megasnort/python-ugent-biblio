@@ -23,6 +23,26 @@ Usage
 ...
 
 
+Testing
+-------
+Testing is done with pytest, install it together with some other dependencies
+
+::
+
+    pip install -r requirements_dev.txt
+
+To run all the tests, run
+
+::
+
+    pytest
+
+To run all the tests, except the slow ones, run
+
+::
+
+    py.test -k-slow
+
 
 .. _`Ghent University Academic Bibliography`: https://biblio.ugent.be/
 .. _UGent: http://www.ugent.be
