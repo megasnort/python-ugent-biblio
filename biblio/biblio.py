@@ -102,7 +102,6 @@ def publications_by_group(ugent_ids):
     :param ugent_ids:
     :return:
     """
-
     try:
         ugent_ids_int = [int(x) for x in ugent_ids]
     except ValueError:
@@ -119,7 +118,6 @@ def publications_by_project(project_id):
     :param project_id:
     :return:
     """
-
     url = BASE_URL + 'project/' + project_id + '/publication/export'
 
     return _get_result(url, {})
@@ -128,10 +126,9 @@ def publications_by_project(project_id):
 def search(query=None):
     """
     Search the Biblio Api for publications having a certain keyword.
-    :param q:
+    :param query:
     :return:
     """
-
     url = BASE_URL + 'publication/export'
 
     if query:
@@ -145,13 +142,10 @@ def search(query=None):
 def _get_result(url, params):
     """
     Get an API-response, formatted as json back from the API.
-
     :param url:
-    :param allowed_parameters:
     :param params:
     :return:
     """
-
     params['format'] = 'json'
 
     response = requests.get(url, params=params)

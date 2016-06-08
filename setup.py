@@ -1,8 +1,15 @@
 from setuptools import setup
 
-setup(name='ugent-biblio',
+
+def readme():
+    with open('README.rst') as f:
+        return f.read()
+
+
+setup(name='ugentbiblio',
       version='0.1.0',
       description='Connector to the API of Ghent University Academic Bibliography',
+      long_description=readme(),
       classifiers=[
           'Development Status :: 3 - Alpha',
           'Programming Language :: Python',
@@ -11,7 +18,8 @@ setup(name='ugent-biblio',
       author_email='stef.bastiaansen@ugent.be',
       url='https://github.com/megasnort/python-ugent-biblio',
       packages=['biblio'],
-      keywords='UGent biblio library publications',
+      keywords='ugent biblio library publications',
+      license='Apache',
       install_requires=[
           'requests',
       ],
