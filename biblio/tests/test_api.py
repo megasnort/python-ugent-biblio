@@ -4,7 +4,7 @@ import requests
 import pytest
 
 from biblio.biblio import publications_by_project, publications_by_organisation, search, publications_by_person, \
-    publications_by_group, BASE_URL, InvalidID, publication
+    publications_by_group, BASE_URL, InvalidID, InvalidYear, publication
 
 
 class TestApi:
@@ -80,3 +80,11 @@ class TestApi:
         items = publications_by_project(self.VALID_PROJECT_ID)
         assert isinstance(items, list)
         assert len(items) > 10
+
+    def test_invalid_ugent_id_should_throw_invalid_year_error(self):
+        with pytest.raises(InvalidYear):
+            publications_by_organisation('PP10', 'test')
+
+    def test_invalid_ugent_ids_should_throw_invalid_id_error(self):
+        with pytest.raises(InvalidID):
+            publications_by_group([self.VALID_UGENT_ID, 'oink'])
