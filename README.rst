@@ -2,6 +2,10 @@
 UGent Biblio
 ============
 
+.. image:: https://readthedocs.org/projects/python-ugent-biblio/badge/?version=latest
+    :target: http://python-ugent-biblio.readthedocs.org/en/latest/?badge=latest
+    :alt: Documentation Status
+
 `Ghent University Academic Bibliography`_ contains all the scientific publications by UGent_ Researchers. The API_ is public and pretty straight forward.
 
 To use the API in Python this wrapper is available. Instead of returning JSON, it returns dictionaries, and provides methods for querying the API, instead of having to do the formatting yourself.
@@ -17,9 +21,7 @@ Installation
 Usage
 -----
 
-
-...
-
+Consult the readthedocs_.
 
 Testing
 -------
@@ -45,3 +47,4 @@ To run all the tests, except the slow ones, run
 .. _`Ghent University Academic Bibliography`: https://biblio.ugent.be/
 .. _UGent: http://www.ugent.be
 .. _API: https://biblio.ugent.be/doc/api
+.. _readthedocs: http://python-ugent-biblio.readthedocs.io/
