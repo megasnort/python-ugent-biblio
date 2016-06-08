@@ -1,0 +1,10 @@
+astroid==1.4.6
+colorama==0.3.7
+docutils==0.12
+lazy-object-proxy==1.2.2
+py==1.4.31
+pylint==1.5.6
+pytest==2.9.2
+requests==2.10.0
+six==1.10.0
+wrapt==1.10.8
