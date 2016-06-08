@@ -3,12 +3,16 @@ UGent Biblio
 ============
 
 .. image:: https://readthedocs.org/projects/python-ugent-biblio/badge/?version=latest
-    :target: http://python-ugent-biblio.readthedocs.org/en/latest/?badge=latest
+    :target: http://python-ugent-biblio.readthedocs.org/en/latest/
     :alt: Documentation Status
 
 .. image:: https://travis-ci.org/megasnort/python-ugent-biblio.svg
-     :target: https://travis-ci.org/megasnort/python-ugent-biblio/
-     :alt: Build status
+    :target: https://travis-ci.org/megasnort/python-ugent-biblio/
+    :alt: Build status
+
+.. image:: https://coveralls.io/repos/github/megasnort/python-ugent-biblio/badge.svg?branch=master
+    :target: https://coveralls.io/github/megasnort/python-ugent-biblio?branch=master
+    :alt: Coverage
 
 `Ghent University Academic Bibliography`_ contains all the scientific publications by UGent_ Researchers. The API_ is public and pretty straight forward.
 
