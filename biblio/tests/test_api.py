@@ -3,7 +3,7 @@
 import requests
 import pytest
 
-from biblio.biblio import _get_result, search, publications_by_person, publications_by_group, BASE_URL, NotAllowedParameter, InvalidID, publication
+from biblio.biblio import publications_by_organisation, search, publications_by_person, publications_by_group, BASE_URL, NotAllowedParameter, InvalidID, publication
 
 
 class TestApi:
@@ -14,6 +14,8 @@ class TestApi:
     # Orphée and Veronique
     VALID_UGENT_GROUP = ['802000574659', '802000247889']
 
+    #
+    VALID_ORGANISATION_ID = 'PP02'
     INVALID_UGENT_ID = '1'
     INVALID_PUBLICATION_ID = '1'
 
@@ -59,3 +61,12 @@ class TestApi:
         item = publication(self.VALID_PUBLICATION_ID)
         assert '_id' in item
         assert item['_id'] == str(self.VALID_PUBLICATION_ID)
+
+    def test_publication_for_organisations(self):
+        all_items = publications_by_organisation(self.VALID_ORGANISATION_ID)
+        items_for_year = publications_by_organisation(self.VALID_ORGANISATION_ID, 2015)
+        assert isinstance(all_items, list)
+        assert len(all_items) > 10
+        assert len(items_for_year) > 1
+        assert len(all_items) > len(items_for_year)
+

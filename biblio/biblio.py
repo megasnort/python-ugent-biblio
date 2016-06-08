@@ -31,6 +31,13 @@ class InvalidID(Exception):
     pass
 
 
+class InvalidYear(Exception):
+    """
+    Exception placeholder for easier debugging.
+    """
+    pass
+
+
 def publication(publication_id):
     """
     Return a single publication
@@ -65,6 +72,26 @@ def publications_by_person(ugent_id):
         )
 
     url = BASE_URL + 'person/' + str(ugent_id_int) + '/publication/export'
+
+    return _get_result(url, {})
+
+
+def publications_by_organisation(organisation_id, year=None):
+    """
+    Get all the records for a given organisation. Year is optional.
+    :param organisation_id:
+    :param year:
+    :return:
+    """
+    year_prefix = ''
+
+    if year:
+        if not str(year).isdigit():
+            raise InvalidYear('Year should be an integer')
+
+        year_prefix = '/' + str(year)
+
+    url = BASE_URL + 'organization/' + organisation_id + year_prefix + '/publication/export'
 
     return _get_result(url, {})
 
@@ -116,7 +143,7 @@ def _get_result(url, params):
     params['format'] = 'json'
 
     response = requests.get(url, params=params)
-    print
+    print response.url
     if response.status_code == 200:
         try:
             return json.loads(response.text)
