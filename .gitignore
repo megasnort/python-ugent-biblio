@@ -26,3 +26,5 @@ develop-eggs
 
 # Setuptools distribution folder.
 /dist/
+
+README.html
