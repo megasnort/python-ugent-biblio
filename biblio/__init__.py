@@ -1,6 +1,8 @@
+"""Connector to the `Ghent University Academic Bibliography`_
+
+.. _`Ghent University Academic Bibliography`: https://biblio.ugent.be/
 """
-Connect to the UGent Biblio API
-"""
+
 from .biblio import search, publications_by_organisation, \
     publications_by_project, publications_by_person, publications_by_group, \
     publication, BASE_URL
