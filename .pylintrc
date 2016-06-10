@@ -1,2 +1,5 @@
 [MASTER]
 ignore=tests
+
+[MESSAGE CONTROL]
+disable=locally-disabled

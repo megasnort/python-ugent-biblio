@@ -4,7 +4,7 @@ import requests
 import pytest
 
 from biblio.biblio import publications_by_project, publications_by_organisation, search, publications_by_person, \
-    publications_by_group, BASE_URL, InvalidID, InvalidYear, publication
+    publications_by_group, BASE_URL, InvalidID, InvalidYear, publication, json_string_to_namedtuple
 
 
 class TestApi:
@@ -88,3 +88,31 @@ class TestApi:
     def test_invalid_ugent_ids_should_throw_invalid_id_error(self):
         with pytest.raises(InvalidID):
             publications_by_group([self.VALID_UGENT_ID, 'oink'])
+
+    def test_json_string_delivers_namedtuple(self):
+        string = '[{"kind":"fullText","id":"7175395","access":"private","size":"1124315"}]'
+        item = json_string_to_namedtuple(string)
+
+        assert item[0].kind
+        assert item[0].id
+        assert item[0].access
+        assert item[0].size
+
+    def test_id_with_underscore_gets_replaced(self):
+        string = '{"kind":"fullText","_id":"7175395","access":"private","size":"1124315"}'
+        item = json_string_to_namedtuple(string)
+        assert item.id
+
+    def test_id_inlist_with_underscore_gets_replaced(self):
+        string = '[{"kind":"fullText","_id":"7175395","access":"private","size":"1124315"}]'
+        item = json_string_to_namedtuple(string)
+
+        assert item[0].id
+
+    def test_id_in_dict_in_list_with_underscore_gets_replaced(self):
+        string = '{"_lalala":[{"kind":"fullText","_id":"7175395","access":[{"_test": 1, "test2": 2}],"size":"1124315"}, {"_kind":"fullText","_id":"123456","access":"private","size":"1124315"}],"_oink": "4"}'
+        item = json_string_to_namedtuple(string)
+
+        assert item.oink
+        assert item.lalala[0].id
+        assert item.lalala[1].kind

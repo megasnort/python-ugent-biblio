@@ -5,9 +5,12 @@ Connector to the `Ghent University Academic Bibliography`_
 ==========================================================
 
 
-`Ghent University Academic Bibliography`_ contains all the scientific publications by UGent_ Researchers. The API_ is public and pretty straight forward.
+`Ghent University Academic Bibliography`_ contains all the scientific publications by
+UGent_ Researchers. The API_ is public and pretty straight forward.
 
-To use the API in Python this wrapper is available. Instead of returning JSON, it returns dictionaries and lists, and provides methods for querying the API, instead of having to do the formatting yourself.
+To use the API in Python this wrapper is available.
+Instead of returning JSON, it returns namedtupes and provides methods for querying the API,
+instead of having to do the formatting of the url and data yourself.
 
 .. _`Ghent University Academic Bibliography`: https://biblio.ugent.be/
 .. _UGent: http://www.ugent.be
@@ -15,7 +18,10 @@ To use the API in Python this wrapper is available. Instead of returning JSON, i
 """
 
 import json
+from collections import namedtuple
+
 import requests
+
 
 BASE_URL = 'https://biblio.ugent.be/'
 
@@ -67,7 +73,7 @@ def publications_by_person(ugent_id):
     """Get all the publications of a person
 
     Args:
-        ugent_id (int): The numerical ugent_id of the person
+        ugent_id (str): The numerical ugent_id of the person
     Returns:
         A list with dictionaries of all the publications of the given person.
         If no person or publications are found, an empty list is returned.
@@ -188,3 +194,37 @@ def _get_result(url, params):
             return [json.loads(x) for x in json_string_list if x]
 
     return None
+
+
+def json_string_to_namedtuple(string):
+    """
+
+    Args:
+        string: a string representing a json that needs to be converted
+        to a named tuple
+
+    Returns:
+        namedtuple
+    """
+    return json.loads(
+        string,
+        object_hook=dictionary_to_namedtuple
+    )
+
+
+def dictionary_to_namedtuple(item):
+    """Function used by the object_hook of named_tuple
+    to translate a dict to a namedtuple
+
+    Args:
+        item (dict): The json object to be converted
+
+    Returns:
+        namedtuple: Containing the recursive indexed data of the dict
+
+    """
+    for key, value in item.iteritems():  # pylint: disable=unused-variable
+        if key.startswith('_'):
+            item[key[1:]] = item.pop(key)
+
+    return namedtuple('d', item.keys(), rename=False)(*item.values())
