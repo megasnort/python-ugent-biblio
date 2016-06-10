@@ -128,6 +128,6 @@ class TestApi:
         publication = single_publication(7175390)
 
         if publication.cite.chicago_author_date:
-            print publication.cite.chicago_author_date
+            print(publication.cite.chicago_author_date)
         else:
-            print 'No chicago author date is provided'
+            print('No chicago author date is provided')
