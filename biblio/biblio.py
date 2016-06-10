@@ -1,16 +1,20 @@
 # encoding: utf-8
 
 """
-Connector to the `Ghent University Academic Bibliography`_
-==========================================================
-
+API Connector to the Ghent University Academic Bibliography
+===========================================================
 
 `Ghent University Academic Bibliography`_ contains all the scientific publications by
 UGent_ Researchers. The API_ is public and pretty straight forward.
 
 To use the API in Python this wrapper is available.
-Instead of returning JSON, it returns namedtupes and provides methods for querying the API,
-instead of having to do the formatting of the url and data yourself.
+Instead of returning plain JSON, it returns named tuples and provides methods for querying the API.
+
+.. note:: Should you consult the original API info, notice two differences
+
+    - Leading underscores on all fields are removed (f.e. ``_id`` becomes ``id``)
+    - All hyphens are replaces with underscores (f.e ``chicago-author-date`` becomes ``chicago_author_date``)
+
 
 .. _`Ghent University Academic Bibliography`: https://biblio.ugent.be/
 .. _UGent: http://www.ugent.be
@@ -47,7 +51,7 @@ class InvalidYear(Exception):
     pass
 
 
-def publication(publication_id):
+def single_publication(publication_id):
     """Get a single publication as a dictionary
 
     Args:

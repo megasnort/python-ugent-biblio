@@ -4,7 +4,7 @@ import requests
 import pytest
 
 from biblio.biblio import publications_by_project, publications_by_organisation, search, publications_by_person, \
-    publications_by_group, BASE_URL, InvalidID, InvalidYear, publication, json_string_to_namedtuple
+    publications_by_group, BASE_URL, InvalidID, InvalidYear, single_publication, json_string_to_namedtuple
 
 
 class TestApi:
@@ -57,13 +57,13 @@ class TestApi:
 
     def test_invalid_publication_id(self):
         with pytest.raises(InvalidID):
-            publication('lalalalala')
+            single_publication('lalalalala')
 
     def test_publication_invalid_id(self):
-        assert publication(self.INVALID_PUBLICATION_ID) is None
+        assert single_publication(self.INVALID_PUBLICATION_ID) is None
 
     def test_publication_has_id(self):
-        item = publication(self.VALID_PUBLICATION_ID)
+        item = single_publication(self.VALID_PUBLICATION_ID)
         assert item.id
         assert item.id == str(self.VALID_PUBLICATION_ID)
 
@@ -117,10 +117,17 @@ class TestApi:
         assert item.lalala[0].id
         assert item.lalala[1].kind
 
-    @pytest.mark.working
     def test_hyphens_in_fieldnames_get_replace(self):
         string = '{"_lalala":[{"kind":"fullText","_i-d":"7175395","access":[{"_test": 1, "test2": 2}],"siz-e":"1124315"}, {"_kind":"fullText","_id":"123456","access":"private","size":"1124315"}],"_oi-nk": "4"}'
         item = json_string_to_namedtuple(string)
 
         assert item.oi_nk
         assert item.lalala[0].i_d
+
+    def test_code_in_documentation(self):
+        publication = single_publication(7175390)
+
+        if publication.cite.chicago_author_date:
+            print publication.cite.chicago_author_date
+        else:
+            print 'No chicago author date is provided'

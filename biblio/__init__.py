@@ -1,11 +1,24 @@
-"""Connector to the `Ghent University Academic Bibliography`_
+"""API Connector to the `Ghent University Academic Bibliography`_
+
+All of the calls return (lists) with named tuples.
+This means that you can access the data with a.dot.notation instead of the regular["dict"]["notation"].
+Note that the API does not return empty values as empty placeholders.
+
+.. code:: python
+
+    publication = single_publication(7175390)
+
+    if publication.cite.chicago_author_date:
+        print publication.cite.chicago_author_date
+    else:
+        print 'No chicago author date is provided'
 
 .. _`Ghent University Academic Bibliography`: https://biblio.ugent.be/
 """
 
 from .biblio import search, publications_by_organisation, \
     publications_by_project, publications_by_person, publications_by_group, \
-    publication, BASE_URL
+    single_publication, BASE_URL
 
 __author__ = 'Stef Bastiaansen'
 __email__ = 'stef.bastiaansen@ugent.be'
