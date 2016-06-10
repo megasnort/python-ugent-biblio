@@ -66,7 +66,7 @@ def publication(publication_id):
 
     url = BASE_URL + 'publication/' + str(publication_id)
 
-    return _get_result(url, {})
+    return get_result(url, {})
 
 
 def publications_by_person(ugent_id):
@@ -88,7 +88,7 @@ def publications_by_person(ugent_id):
 
     url = BASE_URL + 'person/' + str(ugent_id_int) + '/publication/export'
 
-    return _get_result(url, {})
+    return get_result(url, {})
 
 
 def publications_by_organisation(organisation_id, year=None):
@@ -112,7 +112,7 @@ def publications_by_organisation(organisation_id, year=None):
 
     url = BASE_URL + 'organization/' + organisation_id + year_prefix + '/publication/export'
 
-    return _get_result(url, {})
+    return get_result(url, {})
 
 
 def publications_by_group(ugent_ids):
@@ -132,7 +132,7 @@ def publications_by_group(ugent_ids):
 
     url = BASE_URL + 'group/' + ','.join([str(x) for x in ugent_ids_int]) + '/publication/export'
 
-    return _get_result(url, {})
+    return get_result(url, {})
 
 
 def publications_by_project(project_id):
@@ -147,7 +147,7 @@ def publications_by_project(project_id):
     """
     url = BASE_URL + 'project/' + project_id + '/publication/export'
 
-    return _get_result(url, {})
+    return get_result(url, {})
 
 
 def search(query=None):
@@ -167,10 +167,10 @@ def search(query=None):
     else:
         params = {}
 
-    return _get_result(url, params)
+    return get_result(url, params)
 
 
-def _get_result(url, params):
+def get_result(url, params):
     """Get an API-response, formatted as json back from the API.
 
     Args:
