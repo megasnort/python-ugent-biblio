@@ -64,8 +64,8 @@ class TestApi:
 
     def test_publication_has_id(self):
         item = publication(self.VALID_PUBLICATION_ID)
-        assert '_id' in item
-        assert item['_id'] == str(self.VALID_PUBLICATION_ID)
+        assert item.id
+        assert item.id == str(self.VALID_PUBLICATION_ID)
 
     @pytest.mark.slow
     def test_publication_for_organisations(self):
@@ -116,3 +116,11 @@ class TestApi:
         assert item.oink
         assert item.lalala[0].id
         assert item.lalala[1].kind
+
+    @pytest.mark.working
+    def test_hyphens_in_fieldnames_get_replace(self):
+        string = '{"_lalala":[{"kind":"fullText","_i-d":"7175395","access":[{"_test": 1, "test2": 2}],"siz-e":"1124315"}, {"_kind":"fullText","_id":"123456","access":"private","size":"1124315"}],"_oi-nk": "4"}'
+        item = json_string_to_namedtuple(string)
+
+        assert item.oi_nk
+        assert item.lalala[0].i_d

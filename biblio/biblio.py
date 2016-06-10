@@ -186,12 +186,12 @@ def get_result(url, params):
 
     if response.status_code == 200:
         try:
-            return json.loads(response.text)
+            return json_string_to_namedtuple(response.text)
         except ValueError:
             # some of the api calls return one json object per line
             json_string_list = response.text.split('\n')
 
-            return [json.loads(x) for x in json_string_list if x]
+            return [json_string_to_namedtuple(x) for x in json_string_list if x]
 
     return None
 
@@ -224,7 +224,14 @@ def dictionary_to_namedtuple(item):
 
     """
     for key, value in item.iteritems():  # pylint: disable=unused-variable
-        if key.startswith('_'):
-            item[key[1:]] = item.pop(key)
+
+        new_key = key
+
+        if '-' in new_key:
+            new_key = key.replace('-', '_')
+            item[new_key] = item.pop(key)
+
+        if new_key.startswith('_'):
+            item[new_key[1:]] = item.pop(new_key)
 
     return namedtuple('d', item.keys(), rename=False)(*item.values())
