@@ -7,7 +7,7 @@ def readme():
 
 
 setup(name='ugentbiblio',
-      version='0.1.1',
+      version='0.2.0',
       description='Connector to the API of Ghent University Academic Bibliography',
       long_description=readme(),
       classifiers=[
