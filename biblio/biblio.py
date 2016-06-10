@@ -227,7 +227,7 @@ def dictionary_to_namedtuple(item):
         namedtuple: Containing the recursive indexed data of the dict
 
     """
-    for key, value in item.iteritems():  # pylint: disable=unused-variable
+    for key, value in item.items():  # pylint: disable=unused-variable
 
         new_key = key
 
