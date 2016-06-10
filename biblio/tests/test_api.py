@@ -68,7 +68,7 @@ class TestApi:
         assert item.id == str(self.VALID_PUBLICATION_ID)
 
     @pytest.mark.slow
-    def test_publication_for_organisations(self):
+    def test_publications_for_organisation(self):
         all_items = publications_by_organisation(self.VALID_ORGANISATION_ID)
         items_for_year = publications_by_organisation(self.VALID_ORGANISATION_ID, 2015)
         assert isinstance(all_items, list)
