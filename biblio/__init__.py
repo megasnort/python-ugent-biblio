@@ -8,9 +8,9 @@ Note that the API does not return empty values as empty placeholders.
 
     publication = single_publication(7175390)
 
-    if publication.cite.chicago_author_date:
+    try:
         print publication.cite.chicago_author_date
-    else:
+    except AttributeError:
         print 'No chicago author date is provided'
 
 .. _`Ghent University Academic Bibliography`: https://biblio.ugent.be/

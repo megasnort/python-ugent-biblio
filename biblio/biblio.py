@@ -15,7 +15,6 @@ Instead of returning plain JSON, it returns named tuples and provides methods fo
     - Leading underscores on all fields are removed (e.g. ``_id`` becomes ``id``)
     - All hyphens are replaces with underscores (e.g. ``chicago-author-date`` becomes ``chicago_author_date``)
 
-
 .. _`Ghent University Academic Bibliography`: https://biblio.ugent.be/
 .. _UGent: http://www.ugent.be
 .. _API: https://biblio.ugent.be/doc/api
