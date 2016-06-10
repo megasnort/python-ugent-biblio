@@ -7,12 +7,16 @@ def readme():
 
 
 setup(name='ugentbiblio',
-      version='0.2.0',
+      version='0.2.1',
       description='Connector to the API of Ghent University Academic Bibliography',
       long_description=readme(),
       classifiers=[
-          'Development Status :: 3 - Alpha',
+          'Development Status :: 4 - Beta',
           'Programming Language :: Python',
+          'Intended Audience :: Developers',
+          'Intended Audience :: Education',
+          'Intended Audience :: Science/Research',
+          'License :: OSI Approved :: Apache Software License'
       ],
       author='Stef Bastiaansen',
       author_email='stef.bastiaansen@ugent.be',
