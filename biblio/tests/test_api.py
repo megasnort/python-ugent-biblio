@@ -32,6 +32,7 @@ class TestApi:
         assert 200 == response.status_code
         assert 'application/json; charset=utf-8' == response.headers['content-type']
 
+    @pytest.mark.slow
     def test_search_response_is_a_list(self):
         assert isinstance(search('111'), list)
 
