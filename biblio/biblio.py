@@ -52,12 +52,12 @@ class InvalidYear(Exception):
 
 
 def single_publication(publication_id):
-    """Get a single publication as a dictionary
+    """Get a single publication as a named tuple
 
     Args:
         publication_id (int): The numerical id, of the wanted publication
     Returns:
-        A dictionary if a publication is found,
+        A named tuple if a publication is found,
         None when nothing is found.
     """
     try:
@@ -79,7 +79,7 @@ def publications_by_person(ugent_id):
     Args:
         ugent_id (str): The numerical ugent_id of the person
     Returns:
-        A list with dictionaries of all the publications of the given person.
+        A list with named tuples of all the publications of the given person.
         If no person or publications are found, an empty list is returned.
     """
     try:
@@ -102,7 +102,7 @@ def publications_by_organisation(organisation_id, year=None):
         organisation_id (str): The id of the organisation.
         year (int): The year of publication. When omitted, all the publications are returned
     Returns:
-        A list with dictionaries of all the publications of the given organisation.
+        A list with named tuples of all the publications of the given organisation.
         If no organisation is found, None is returned.
         If no publication is found, an empty list is returned
     """
@@ -125,7 +125,7 @@ def publications_by_group(ugent_ids):
     Args:
         ugent_ids (list): A list of integers
     Returns:
-        A list with dictionaries of all the publications that
+        A list with named tuples of all the publications that
         share the group of people
         If no person or publications are found, an empty list is returned.
     """
@@ -145,7 +145,7 @@ def publications_by_project(project_id):
     Args:
         project_id (str): The id of the project
     Returns:
-        A list with dictionaries of all the publications that
+        A list with named tuples of all the publications that
         belong to the given project.
         When no project or publications are found, an empty list is returned.
     """
@@ -160,7 +160,7 @@ def search(query=None):
     Args:
         query (str): the keyword that needs to be searched
     Returns:
-        A list with dictionaries of all the publications that
+        A list with named tuples of all the publications that
         match the query
         When no publications are found, an empty list is returned.
     """
