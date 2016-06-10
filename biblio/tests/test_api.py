@@ -124,11 +124,3 @@ class TestApi:
 
         assert item.oi_nk
         assert item.lalala[0].i_d
-
-    def test_code_in_documentation(self):
-        publication = single_publication(7175390)
-
-        if publication.cite.chicago_author_date:
-            print(publication.cite.chicago_author_date)
-        else:
-            print('No chicago author date is provided')
