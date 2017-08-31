@@ -165,10 +165,10 @@ def search(query=None):
     """
     url = BASE_URL + 'publication/export'
 
+    params = {}
+
     if query:
-        params = {'q': query}
-    else:
-        params = {}
+        params['q'] = query
 
     return get_result(url, params)
 

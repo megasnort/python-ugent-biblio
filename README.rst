@@ -43,7 +43,7 @@ To run all the tests, run
 
 ::
 
-    pytest
+    py.test
 
 To run all the tests, except the slow ones, run
 
